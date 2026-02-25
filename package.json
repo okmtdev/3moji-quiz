@@ -1,0 +1,13 @@
+{
+  "name": "3moji-quiz",
+  "version": "1.0.0",
+  "description": "３もじ くいず - 子供向けひらがなクイズゲーム",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "node build.js",
+    "deploy": "gsutil -m rsync -r -d dist gs://YOUR_BUCKET_NAME"
+  },
+  "keywords": ["quiz", "kids", "hiragana"],
+  "author": "",
+  "license": "ISC"
+}

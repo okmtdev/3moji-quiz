@@ -1,0 +1,487 @@
+/* ===== リセット & ベース ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+  background: #fffbe6;
+  color: #333;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ===== 画面管理 ===== */
+.screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== スタート画面 ===== */
+.start-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: clamp(3rem, 12vw, 6rem);
+  color: #ff6b9d;
+  text-shadow: 3px 3px 0 #ffd1dc;
+  line-height: 1.3;
+  margin-bottom: 60px;
+  letter-spacing: 0.1em;
+}
+
+.start-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* ===== ボタン ===== */
+.btn {
+  border: none;
+  border-radius: 50px;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-family: inherit;
+  cursor: pointer;
+  padding: 16px 48px;
+  transition: transform 0.1s, box-shadow 0.1s;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  min-width: 200px;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-primary {
+  background: #ff6b9d;
+  color: #fff;
+  box-shadow: 0 4px 0 #d4527c;
+}
+
+.btn-primary:active {
+  box-shadow: 0 2px 0 #d4527c;
+  transform: translateY(2px) scale(0.98);
+}
+
+.btn-secondary {
+  background: #7ec8e3;
+  color: #fff;
+  box-shadow: 0 4px 0 #5aa8c4;
+}
+
+.btn-secondary:active {
+  box-shadow: 0 2px 0 #5aa8c4;
+  transform: translateY(2px) scale(0.98);
+}
+
+.btn-clear {
+  background: #aaa;
+  color: #fff;
+  box-shadow: 0 4px 0 #888;
+  padding: 14px 32px;
+}
+
+.btn-confirm {
+  background: #5cb85c;
+  color: #fff;
+  box-shadow: 0 4px 0 #449d44;
+  padding: 14px 32px;
+}
+
+.btn-confirm.disabled {
+  background: #ccc;
+  box-shadow: 0 4px 0 #aaa;
+  pointer-events: none;
+}
+
+.btn-share {
+  background: #06c755;
+  color: #fff;
+  box-shadow: 0 4px 0 #05a847;
+  padding: 14px 32px;
+}
+
+/* ===== ゲーム画面 ===== */
+#screen-game.active {
+  justify-content: flex-start;
+  padding: 16px;
+  gap: 0;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+.question-number {
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  color: #888;
+  font-weight: bold;
+}
+
+.score {
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  color: #ff6b9d;
+  font-weight: bold;
+  background: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.question-text {
+  font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+  text-align: center;
+  color: #555;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  max-width: 500px;
+  padding: 0 8px;
+}
+
+/* ===== 回答エリア ===== */
+.answer-area {
+  margin-bottom: 24px;
+}
+
+.answer-slots {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.slot {
+  width: clamp(56px, 16vw, 80px);
+  height: clamp(56px, 16vw, 80px);
+  border: 3px dashed #ffc0cb;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  background: #fff;
+  transition: all 0.15s;
+}
+
+.slot.filled {
+  border-style: solid;
+  border-color: #ff6b9d;
+  background: #fff0f5;
+}
+
+/* ===== 文字選択肢 ===== */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 500px;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.choice-btn {
+  width: clamp(48px, 13vw, 68px);
+  height: clamp(48px, 13vw, 68px);
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  background: #fff;
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+  box-shadow: 0 3px 0 #ddd;
+  color: #333;
+}
+
+.choice-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #ddd;
+}
+
+.choice-btn.selected {
+  background: #ffc0cb;
+  border-color: #ff6b9d;
+  color: #fff;
+  box-shadow: 0 3px 0 #d4527c;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ===== ゲームアクション ===== */
+.game-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* ===== 結果画面（一問ごと） ===== */
+.result-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.result-icon {
+  font-size: clamp(4rem, 20vw, 8rem);
+  margin-bottom: 12px;
+}
+
+.result-label {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.result-label.correct {
+  color: #5cb85c;
+}
+
+.result-label.wrong {
+  color: #e74c3c;
+}
+
+.result-answer {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: #666;
+  margin-bottom: 32px;
+}
+
+/* ===== 最終結果画面 ===== */
+#screen-final.active {
+  justify-content: center;
+}
+
+.final-container {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.final-title {
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: #ff6b9d;
+  margin-bottom: 24px;
+}
+
+.final-score {
+  font-size: clamp(3rem, 14vw, 6rem);
+  font-weight: bold;
+  color: #5cb85c;
+  margin-bottom: 16px;
+}
+
+.final-detail {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  color: #888;
+  text-align: left;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  max-height: 40vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.final-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: clamp(0.95rem, 3.2vw, 1.1rem);
+}
+
+.final-detail-row:last-child {
+  border-bottom: none;
+}
+
+.final-detail-row .mark {
+  font-size: 1.3em;
+  flex-shrink: 0;
+}
+
+.final-tap {
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  color: #aaa;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ===== きろく画面 ===== */
+#screen-history.active,
+#screen-history-detail.active {
+  justify-content: flex-start;
+  padding: 24px 16px;
+}
+
+.history-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.history-title {
+  font-size: clamp(1.8rem, 7vw, 2.5rem);
+  color: #7ec8e3;
+  margin-bottom: 8px;
+}
+
+.history-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.history-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.history-item:active {
+  transform: scale(0.98);
+}
+
+.history-item-date {
+  font-size: clamp(0.8rem, 2.8vw, 0.95rem);
+  color: #aaa;
+}
+
+.history-item-score {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: bold;
+  color: #ff6b9d;
+}
+
+.history-empty {
+  text-align: center;
+  color: #bbb;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  padding: 40px 0;
+}
+
+/* ===== きろく詳細 ===== */
+.history-detail-content {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.detail-score-header {
+  text-align: center;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: bold;
+  color: #ff6b9d;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .mark {
+  font-size: 1.3em;
+  flex-shrink: 0;
+}
+
+.detail-row .q-text {
+  flex: 1;
+  color: #666;
+}
+
+.detail-row .a-text {
+  font-weight: bold;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.history-detail-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== レスポンシブ微調整 ===== */
+@media (min-width: 768px) {
+  .choices {
+    gap: 14px;
+  }
+  .game-actions {
+    gap: 24px;
+  }
+}
+
+@media (max-height: 600px) {
+  .question-text {
+    margin-bottom: 12px;
+  }
+  .answer-area {
+    margin-bottom: 12px;
+  }
+  .choices {
+    margin-bottom: 12px;
+  }
+}

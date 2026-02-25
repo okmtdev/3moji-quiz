@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>３もじ くいず</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ===== スタート画面 ===== -->
+  <div id="screen-start" class="screen active">
+    <div class="start-container">
+      <h1 class="title">３もじ<br>くいず</h1>
+      <div class="start-buttons">
+        <button id="btn-start" class="btn btn-primary">かいし</button>
+        <button id="btn-records" class="btn btn-secondary">きろく</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ゲーム画面 ===== -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <div class="question-number" id="question-number"></div>
+      <div class="score" id="score">せいかい: 0</div>
+    </div>
+    <div class="question-text" id="question-text"></div>
+    <div class="answer-area">
+      <div class="answer-slots" id="answer-slots">
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+      </div>
+    </div>
+    <div class="choices" id="choices"></div>
+    <div class="game-actions">
+      <button id="btn-clear" class="btn btn-clear">くりあ</button>
+      <button id="btn-confirm" class="btn btn-confirm">かくてい</button>
+    </div>
+  </div>
+
+  <!-- ===== 正解・不正解 画面 ===== -->
+  <div id="screen-result" class="screen">
+    <div class="result-container">
+      <div class="result-icon" id="result-icon"></div>
+      <div class="result-label" id="result-label"></div>
+      <div class="result-answer" id="result-answer"></div>
+      <button id="btn-next" class="btn btn-primary">つぎへ</button>
+    </div>
+  </div>
+
+  <!-- ===== 最終結果画面 ===== -->
+  <div id="screen-final" class="screen">
+    <div class="final-container">
+      <h2 class="final-title">けっか</h2>
+      <div class="final-score" id="final-score"></div>
+      <div class="final-detail" id="final-detail"></div>
+      <p class="final-tap" id="final-tap" style="display:none;">タップで もどる</p>
+    </div>
+  </div>
+
+  <!-- ===== きろく画面 ===== -->
+  <div id="screen-history" class="screen">
+    <div class="history-container">
+      <h2 class="history-title">きろく</h2>
+      <div class="history-list" id="history-list"></div>
+      <button id="btn-back" class="btn btn-secondary">もどる</button>
+    </div>
+  </div>
+
+  <!-- ===== きろく詳細画面 ===== -->
+  <div id="screen-history-detail" class="screen">
+    <div class="history-container">
+      <h2 class="history-title">きろく</h2>
+      <div class="history-detail-content" id="history-detail-content"></div>
+      <div class="history-detail-actions">
+        <button id="btn-share" class="btn btn-share">シェア</button>
+        <button id="btn-back-history" class="btn btn-secondary">もどる</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
