@@ -125,9 +125,17 @@ body {
 
 /* ===== ゲーム画面 ===== */
 #screen-game.active {
-  justify-content: flex-start;
+  justify-content: center;
   padding: 16px;
   gap: 0;
+}
+
+.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
 }
 
 .game-header {
@@ -135,33 +143,32 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 500px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .question-number {
-  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  font-size: clamp(1.15rem, 4.5vw, 1.4rem);
   color: #888;
   font-weight: bold;
 }
 
 .score {
-  font-size: clamp(1rem, 3.5vw, 1.4rem);
+  font-size: clamp(1.15rem, 4.5vw, 1.4rem);
   color: #ff6b9d;
   font-weight: bold;
   background: #fff;
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .question-text {
-  font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+  font-size: clamp(1.3rem, 5vw, 1.8rem);
   text-align: center;
   color: #555;
   margin-bottom: 24px;
   line-height: 1.6;
-  max-width: 500px;
+  width: 100%;
   padding: 0 8px;
 }
 
@@ -172,19 +179,19 @@ body {
 
 .answer-slots {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
 }
 
 .slot {
-  width: clamp(56px, 16vw, 80px);
-  height: clamp(56px, 16vw, 80px);
+  width: clamp(60px, 18vw, 80px);
+  height: clamp(60px, 18vw, 80px);
   border: 3px dashed #ffc0cb;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-size: clamp(2rem, 8vw, 2.8rem);
   background: #fff;
   transition: all 0.15s;
 }
@@ -197,22 +204,20 @@ body {
 
 /* ===== 文字選択肢 ===== */
 .choices {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  justify-content: center;
-  max-width: 500px;
+  width: 100%;
   margin-bottom: 24px;
   padding: 0 8px;
 }
 
 .choice-btn {
-  width: clamp(48px, 13vw, 68px);
-  height: clamp(48px, 13vw, 68px);
+  aspect-ratio: 1;
   border: 2px solid #ddd;
   border-radius: 14px;
   background: #fff;
-  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  font-size: clamp(1.6rem, 6.5vw, 2.2rem);
   font-family: inherit;
   cursor: pointer;
   display: flex;
@@ -221,6 +226,7 @@ body {
   transition: all 0.1s;
   box-shadow: 0 3px 0 #ddd;
   color: #333;
+  width: 100%;
 }
 
 .choice-btn:active {
@@ -242,6 +248,8 @@ body {
   display: flex;
   gap: 16px;
   justify-content: center;
+  width: 100%;
+  padding: 0 8px;
 }
 
 /* ===== 結果画面（一問ごと） ===== */
@@ -464,24 +472,65 @@ body {
   flex-wrap: wrap;
 }
 
-/* ===== レスポンシブ微調整 ===== */
+/* ===== スマホ縦長レイアウト ===== */
+@media (max-width: 480px) {
+  .choices {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .choice-btn {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    border-radius: 16px;
+    box-shadow: 0 4px 0 #ddd;
+  }
+
+  .game-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .game-actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .question-text {
+    margin-bottom: 20px;
+  }
+
+  .answer-area {
+    margin-bottom: 20px;
+  }
+}
+
+/* ===== PC・タブレット ===== */
 @media (min-width: 768px) {
   .choices {
     gap: 14px;
+    max-width: 400px;
   }
   .game-actions {
     gap: 24px;
   }
 }
 
+/* ===== 画面が短い場合 ===== */
 @media (max-height: 600px) {
   .question-text {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .answer-area {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .choices {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    gap: 6px;
+  }
+  .game-header {
+    margin-bottom: 10px;
   }
 }
